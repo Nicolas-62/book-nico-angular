@@ -1,5 +1,7 @@
 # BookNicoAngular
 
+Projet créé à partir du tuto openclassroom suivant : https://openclassrooms.com/fr/courses/4668271-developpez-des-applications-web-avec-angular/5091266-creez-une-application-complete-avec-angular-et-firebase
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.2.1.
 
 ## Development server
