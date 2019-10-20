@@ -1,0 +1,10 @@
+.mainContainer{
+	background-color: #F5FFFA;
+	padding-top: 64px;
+	min-height: 93.5vh;
+}
+footer{
+	background-color: #5F5F5F;
+	color: white;
+	font-style: italic;
+}

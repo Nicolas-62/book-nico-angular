@@ -1,21 +1,24 @@
-<nav class="navbar navbar-default">
+<nav class="navbar navbar-expand-sm fixed-top">
   <div class="container-fluid">
     <ul class="nav navbar-nav">
       <li routerLinkActive="active">
-        <a routerLink="books">Livres</a>
+        <a routerLink="books" class="linkBibli">La bibliothèque</a>
       </li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
       <li routerLinkActive="active" *ngIf="!isAuth">
-        <a routerLink="auth/signup">Créer un compte</a>
+        <a routerLink="auth/signup" class="btn btn-success mr-3" role="button">Créer un compte</a>
       </li>
       <li routerLinkActive="active" *ngIf="!isAuth">
-        <a routerLink="auth/signin">Connexion</a>
+        <a routerLink="auth/signin" class="btn btn-success" role="button">Connexion</a>
       </li>
       <li>
         <a (click)="onSignOut()"
             style="cursor:pointer"
-            *ngIf="isAuth">Déconnexion</a>
+            *ngIf="isAuth"
+            class="btn btn-danger" 
+            role="button">Déconnexion</a>
+      </li>
     </ul>
   </div>
 </nav>

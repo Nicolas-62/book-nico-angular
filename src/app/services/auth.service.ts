@@ -7,6 +7,8 @@ import * as firebase from 'firebase';
 })
 export class AuthService {
 
+  pseudo: string;
+
   constructor() { }
   /*Ensuite, créez la méthode  createNewUser()  pour créer un nouvel utilisateur, 
   	qui prendra comme argument une adresse mail et un mot de passe, 
@@ -16,6 +18,8 @@ export class AuthService {
   	return new Promise((resolve, reject) => {
   		firebase.auth().createUserWithEmailAndPassword(email, password).then(
   			() => {
+          var pseudo = email.split('@');
+          this.pseudo = pseudo[0];
   				resolve();
   			},
   			(error) => {
@@ -28,6 +32,8 @@ export class AuthService {
   	return new Promise((resolve, reject) => {
   		firebase.auth().signInWithEmailAndPassword(email, password).then(
   			() => {
+          var pseudo = email.split('@');
+          this.pseudo = pseudo[0];
   				resolve();
   			},
   			(error) => {

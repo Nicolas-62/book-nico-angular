@@ -1,20 +1,32 @@
 <div class="row">
-  <div class="col-xs-12">
-    <h2>Vos livres</h2>
-    <div class="list-group">
+  <div class=" colHeader col-sm-12 d-flex justify-content-between mb-3">
+    <h1>Les livres</h1>
+    <h2>"Venez partager vos lectures"</h2>
+    <button class="btnAjoutLivre btn btn-primary" (click)="onNewBook()">Ajouter un livre</button>
+    <button class="btnAjoutLivreMini btn btn-primary" (click)="onNewBook()">+</button>
+  </div>
+  <div class="colBody col-sm-12">
+    <div class="listBtnBook list-group">
       <button
         class="list-group-item"
         *ngFor="let book of bookList; let i = index"
         (click)="onViewBook(i)">
-        <h3 class="list-group-item-heading">
-          {{ book.title }}
-          <button class="btn btn-default pull-right" (click)="onDeleteBook(book)">
-            <span class="glyphicon glyphicon-minus"></span>
-          </button>
-        </h3>
-        <p class="list-group-item-text">{{ book.author }}</p>
+        <div class="row">
+          <div class="col-sm-8">
+            <h3 class="list-group-item-heading">
+              {{ book.title }}
+              <button class="deleteBook btn btn-default pull-right" (click)="onDeleteBook(book)">
+                <span class="glyphicon glyphicon-minus"></span>
+              </button>
+            </h3>
+            <p class="list-group-item-text">par {{ book.author }}</p>
+            <p class="synopsis">{{ book.synopsis}}</p>
+          </div>
+          <div class="col-sm-4">
+            <img *ngIf="book.photo" [src]="book.photo">
+          </div>
+        </div>
       </button>
     </div>
-    <button class="btn btn-primary" (click)="onNewBook()">Nouveau livre</button>
   </div>
 </div>

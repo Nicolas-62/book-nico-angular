@@ -33,7 +33,6 @@ export class BooksService {
   	firebase.database().ref('/books').on('value', (data: firebase.database.DataSnapshot) => {
 
   			this.books = data.val() ? data.val() : [];
-  			console.log('books service, getBooks : '+this.books);
   			this.emitBooks();
   		} 
   	);
@@ -58,6 +57,17 @@ export class BooksService {
   	this.emitBooks();
   }
   removeBook(book: Book){
+    if(book.photo) {
+      const storageRef = firebase.storage().refFromURL(book.photo);
+      storageRef.delete().then(
+        () => {
+          console.log('Photo removed!');
+        },
+        (error) => {
+          console.log('Could not remove photo! : ' + error);
+        }
+      );
+    }
   	const bookIndexToRemove = this.books.findIndex(
   		(bookE1) => {
   			if(bookE1 === book){
@@ -71,5 +81,30 @@ export class BooksService {
   	this.emitBooks();
 
   }
-
+	uploadFile(file: File) {
+    return new Promise(
+      (resolve, reject) => {
+      	// nom de fichier unique
+        const almostUniqueFileName = Date.now().toString();
+        // creation d'une tache de chargement 'upload'
+        const upload = firebase.storage().ref()
+          .child('images/' + almostUniqueFileName + file.name).put(file);
+        // suivi de l'état du chargement
+        upload.on(firebase.storage.TaskEvent.STATE_CHANGED,
+        	// déclanché quand le chargement est lancé
+          () => {
+            console.log('Chargement…');
+          },
+          (error) => {
+            console.log('Erreur de chargement ! : ' + error);
+            reject();
+          },
+          // déclanché quand le chargement est terminé, retourne l'URL unique du fichier chargé
+          () => {
+            resolve(upload.snapshot.ref.getDownloadURL());
+          }
+        );
+      }
+    );
+	}
 }

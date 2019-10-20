@@ -1,8 +1,19 @@
 <div class="row">
-  <div class="col-xs-12">
-    <h1>{{ book.title }}</h1>
-    <h3>{{ book.author }}</h3>
-    <p>{{ book.synopsis }}</p>
-    <button class="btn btn-default" (click)="onBack()">Retour</button>
+  <div class="col-sm-12 d-flex justify-content-end mb-3">
+  	<button class="btn btn-default" (click)="onBack()">Retour</button>
+  </div>
+  <div class="col-sm-8">
+    <h1 class="list-group-item-heading">
+      {{ book.title }}
+      <button class="btn btn-default pull-right" (click)="onDeleteBook(book)">
+        <span class="glyphicon glyphicon-minus"></span>
+      </button>
+    </h1>
+    <h4 class="list-group-item-text">par {{ book.author }}</h4>
+    <p class="synopsis">{{ book.synopsis}}</p>
+    <p class="ajoutInfos">Ajouté le {{ book.date }} par {{ book.memberAuthor }}
+  </div>
+  <div class="col-sm-4">
+    <img *ngIf="book.photo" [src]="book.photo">
   </div>
 </div>

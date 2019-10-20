@@ -1,6 +1,6 @@
-<div class="row">
+<div class="formRow row">
   <div class="col-sm-8 col-sm-offset-2">
-    <h2>Enregistrer un nouveau livre</h2>
+    <h1>Enregistrer un nouveau livre</h1>
     <form [formGroup]="bookForm" (ngSubmit)="onSaveBook()">
       <div class="form-group">
         <label for="title">Titre</label>
@@ -18,7 +18,13 @@
                   class="form-control" formControlName="synopsis">
         </textarea>
       </div>
-      <button class="btn btn-success" [disabled]="bookForm.invalid"
+			<div class="form-group">
+			    <h4>Ajouter une photo</h4>
+			    <input type="file" (change)="detectFiles($event)"
+			            accept="image/*">
+			    <p class="text-success" *ngIf="fileUploaded">Fichier chargé !</p>
+			</div>      
+      <button class="btn btn-success" [disabled]="bookForm.invalid || fileIsUploading"
               type="submit">Enregistrer
       </button>
 
